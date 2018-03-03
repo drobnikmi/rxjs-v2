@@ -4,13 +4,13 @@ import { FormControl, FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-form-comp',
   template: `
-  <form [formGroup]="someForm" (ngSubmit)="">
+  <form [formGroup]="someForm">
   <div class="form-group">
-    <label class="center-block">Name:
+    <label class="center-block">Message: 
       <input class="form-control" formControlName="name">
     </label>
   </div>
-  <button type="submit">someButton</button>
+  <button type="submit">Send</button>
 </form>
 <p>Form value: {{ someForm.value}}</p>
   `,
