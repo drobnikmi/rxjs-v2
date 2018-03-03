@@ -15,4 +15,7 @@ export class AppComponent {
     console.log(this.items);
     console.log(db);
   }
+  addElement(data){
+    console.log(data);
+  }
 }

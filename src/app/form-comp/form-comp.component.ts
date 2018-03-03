@@ -1,13 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Subject } from 'rxjs/Subject';
+
 
 @Component({
   selector: 'app-form-comp',
   template: `
-<form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
+<form [formGroup]="myForm" (ngSubmit)="formSubject.next()">
 <div class="form-group">
     <label class="center-block">Message:
       <input class="form-control" formControlName="name">
+    </label>
+    <label class="center-block">Time:
+      <input class="form-control" formControlName="time">
+    </label>
+    <label class="center-block">User:
+      <input class="form-control" formControlName="user">
     </label>
   </div>
   <button type="submit">Send</button>
@@ -15,15 +23,17 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   `,
   styleUrls: ['./form.component.sass']
 })
-export class FormCompComponent implements OnInit {
+export class FormCompComponent {
   myForm: FormGroup;
-  constructor() { }
-  ngOnInit() {
-    this.myForm = new FormGroup({
-      name: new FormControl('')
+  @Output() formSubmit = new EventEmitter();
+  formSubject= new Subject();
+  constructor(private formBuilder: FormBuilder) {
+    this.myForm = formBuilder.group({
+      name: [''],
+      time: [''],
+      user: ['']
     });
-  }
-  onSubmit(form: FormGroup) {
-    console.log('Name', form.value.name, [Validators.required, , Validators.minLength(1)]);
+    this.formSubject
+      .subscribe(() => this.formSubmit.emit(this.myForm.value))
   }
 }
