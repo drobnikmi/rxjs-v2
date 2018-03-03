@@ -7,7 +7,7 @@ import 'rxjs/add/operator/filter';
 @Component({
   selector: 'app-form-comp',
   template: `
-  <form [formGroup]="myForm">
+  <form [formGroup]="myForm" (ngSubmit)="formSubject.next()">
   <div class="form-group">
     <label class="center-block">Message:
       <input class="form-control" formControlName="name">
@@ -19,7 +19,7 @@ import 'rxjs/add/operator/filter';
       <input class="form-control" formControlName="user">
     </label>
   </div>
-  <button type="submit" [disabled]="myForm.invalid">Send</button>
+  <button type="submit" [disabled]="myForm.invalid" >Send</button>
 </form>
   `,
   styleUrls: ['./form.component.sass']
