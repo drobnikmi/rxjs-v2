@@ -26,7 +26,7 @@ import 'rxjs/add/operator/filter';
 })
 export class FormCompComponent {
   myForm: FormGroup;
-  
+
   @Output() formSubmit = new EventEmitter();
   formSubject= new Subject();
 
@@ -38,7 +38,7 @@ export class FormCompComponent {
     });
 
     this.formSubject
-      .filter(() => this.someForm.valid)
+      .filter(() => this.myForm.valid)
       .subscribe(() => this.formSubmit.emit(this.myForm.value))
   }
 }
