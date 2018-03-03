@@ -4,10 +4,7 @@ import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-root',
-  template: `
-    <div>{{title}}</div>
-    <p>aaa</p>
-  `,
+  templateUrl: './app.component.html',
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
