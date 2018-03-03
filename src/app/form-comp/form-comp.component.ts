@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Subject } from 'rxjs/Subject';
@@ -7,32 +7,38 @@ import 'rxjs/add/operator/filter';
 @Component({
   selector: 'app-form-comp',
   template: `
-  <form [formGroup]="someForm">
+  <form [formGroup]="myForm">
   <div class="form-group">
     <label class="center-block">Message:
-      <input class="form-control" formControlName="name" [value]="someForm.value.name">
+      <input class="form-control" formControlName="name">
+    </label>
+    <label class="center-block">Time:
+      <input class="form-control" formControlName="time">
+    </label>
+    <label class="center-block">User:
+      <input class="form-control" formControlName="user">
     </label>
   </div>
-  <button type="submit" mat-button [disabled]="someForm.invalid">Send</button>
+  <button type="submit" [disabled]="myForm.invalid">Send</button>
 </form>
-<p>Form value: {{ someForm.value}}</p>
   `,
   styleUrls: ['./form.component.sass']
 })
-export class FormCompComponent implements OnInit {
-  someForm = new FormGroup ({
-    name: new FormControl()
-  });
-
-  formSubmitSubject = new Subject();
+export class FormCompComponent {
+  myForm: FormGroup;
+  
+  @Output() formSubmit = new EventEmitter();
+  formSubject= new Subject();
 
   constructor(private formBuilder: FormBuilder) {
-    this.someForm = formBuilder.group({
-        name: ['', Validators.required]
+    this.myForm = formBuilder.group({
+      name: ['', Validators.required],
+      time: ['', Validators.required],
+      user: ['', Validators.required]
     });
 
-    this.formSubmitSubject
-      .filter(() => this.someForm.valid);
-
+    this.formSubject
+      .filter(() => this.someForm.valid)
+      .subscribe(() => this.formSubmit.emit(this.myForm.value))
   }
 }
