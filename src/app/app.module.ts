@@ -8,6 +8,10 @@ import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { FormCompComponent } from './form-comp/form-comp.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DataUpdateService } from './data-update.service';
+import { HttpClientModule } from '@angular/common/http';
+
+
 
 @NgModule({
   declarations: [
@@ -20,9 +24,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [DataUpdateService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

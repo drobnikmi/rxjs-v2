@@ -10,13 +10,13 @@ import 'rxjs/add/operator/filter';
   <form [formGroup]="myForm" (ngSubmit)="formSubject.next()">
   <div class="form-group">
     <label class="center-block">Message:
-      <input class="form-control" formControlName="name">
+      <input class="form-control" formControlName="body">
     </label>
     <label class="center-block">Time:
-      <input class="form-control" formControlName="time">
+      <input class="form-control" formControlName="timestamp">
     </label>
     <label class="center-block">User:
-      <input class="form-control" formControlName="user">
+      <input class="form-control" formControlName="sender">
     </label>
   </div>
   <button type="submit" [disabled]="myForm.invalid" >Send</button>
@@ -32,13 +32,15 @@ export class FormCompComponent {
 
   constructor(private formBuilder: FormBuilder) {
     this.myForm = formBuilder.group({
-      name: ['', Validators.required],
-      time: ['', Validators.required],
-      user: ['', Validators.required]
+      body: ['', Validators.required],
+      timestamp: ['', Validators.required],
+      sender: ['', Validators.required]
     });
 
     this.formSubject
       .filter(() => this.myForm.valid)
+      // .map(() => this.form.value)
+      // .subscribe(this.formSubmit);
       .subscribe(() => this.formSubmit.emit(this.myForm.value))
   }
 }
