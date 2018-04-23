@@ -1,10 +1,35 @@
-<ul>
-  <li class="text" *ngFor="let item of items | async">
-    <p>{{item.body}} </p>
-    <p>{{item.timestamp}} </p>
-    <p>{{item.sender}} </p>
-  </li>
-</ul>
-<h1>Reactive Form:</h1>
-<app-form-comp (formSubmit)="addElement($event)"></app-form-comp>
+<div class="container">
+  <div class="row">
+    <div class="col-12 text-center text-success">
+      <h1>Poznań 4 ever!</h1>
+    </div>
+    <div class="col-12">
+      <h2>Reactive Form:</h2>
+      <app-form-comp (formSubmit)="addElement($event)"></app-form-comp>
+    </div>
+  </div>
+</div>
 
+<div class="container">
+  <div class="row">
+    <div class="col-8">
+      <div class="card mb-4 bg-light" *ngFor="let item of items | async">
+        <div class="card-header">
+          {{ item.timestamp | date:'yyyy-MM-dd HH:mm' }}
+        </div>
+        <div class="card-body">
+          <blockquote class="blockquote mb-0 text-secondary">
+            <p>{{ item.body }}</p>
+            <footer class="blockquote-footer">
+              <cite title="Source Title">{{ item.sender }}</cite>
+            </footer>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <app-spinner-loading *ngIf="isLoading"></app-spinner-loading>
+      <app-images-list [items]="items" (isLoading)="changeLoadingStatus($event)"></app-images-list>
+    </div>
+  </div>
+</div>

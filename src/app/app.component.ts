@@ -1,6 +1,6 @@
+import { Subject } from 'rxjs/Subject';
 import { Component } from '@angular/core';
-import { AngularFirestore } from 'angularfire2/firestore';
-import { Observable } from 'rxjs/Observable';
+import { DataUpdateService } from './data-update.service';
 
 @Component({
   selector: 'app-root',
@@ -8,12 +8,19 @@ import { Observable } from 'rxjs/Observable';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
-  title = 'app';
-  items: Observable<any[]>;
-  constructor(db: AngularFirestore) {
-    this.items = db.collection('messages').valueChanges();
+  private items;
+  isLoading = true;
+
+  constructor(private dataUpdate: DataUpdateService) {
+   this.items = this.dataUpdate.getItemsList();
+  //  this.items.subscribe(val => console.log(val));
   }
-  addElement(data){
-    console.log(data);
+
+  addElement(message) {
+    this.dataUpdate.addElement(message);
+  }
+
+  changeLoadingStatus() {
+    this.isLoading = false;
   }
 }

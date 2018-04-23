@@ -8,11 +8,19 @@ import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { FormCompComponent } from './form-comp/form-comp.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DataUpdateService } from './data-update.service';
+import { HttpClientModule } from '@angular/common/http';
+import { ImagesListComponent } from './images-list/images-list.component';
+import { SpinnerLoadingComponent } from './spinner-loading/spinner-loading.component';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    FormCompComponent
+    FormCompComponent,
+    ImagesListComponent,
+    SpinnerLoadingComponent
   ],
   imports: [
     BrowserModule,
@@ -20,9 +28,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [DataUpdateService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

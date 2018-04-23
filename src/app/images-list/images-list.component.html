@@ -1,0 +1,8 @@
+<ng-container *ngIf="linksList">
+  <h3>Last Images</h3>
+  <div *ngFor="let link of linksList ">
+    <a [href]="link" target="_blank">
+      <img [src]="link" alt="..." class="img-thumbnail">
+    </a>
+  </div>
+</ng-container>
