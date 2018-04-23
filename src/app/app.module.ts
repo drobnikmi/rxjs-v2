@@ -10,8 +10,11 @@ import { FormCompComponent } from './form-comp/form-comp.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DataUpdateService } from './data-update.service';
 import { HttpClientModule } from '@angular/common/http';
+<<<<<<< HEAD
 import { ImagesListComponent } from './images-list/images-list.component';
 import { SpinnerLoadingComponent } from './spinner-loading/spinner-loading.component';
+=======
+>>>>>>> b17e26589dc7cdbe78f6fd5e22ae4d0b1c22687c
 
 
 
